@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Work Form</title>
+    <link rel="stylesheet" href="/src/style/main.css" />
+    <script type="module" src="/src/scr/main.js" defer ></script>
+  </head>
+  <body v-scope="rest({})">
+    <header>
+      <h1>Client Form</h1>
+    </header>
+
+    <main>
+      <section >
+	      <!--<aside></aside>-->
+
+	<article>
+          <form autocomplete="off" >
+            <div>
+		
+              <label>Patients Name</label>
+	      <input type="text" ref="patient_name" required />
+	    
+	    </div>
+
+            <div>
+
+              <label>ID #</label>
+	      <input type="text" ref="patient_id" required />
+	    
+	    </div>
+
+
+            <div>
+
+              <label>concern / no concern</label>
+	      <input type="text" ref="concern_noconcern" required />
+	    
+	    </div>
+
+
+            <div>
+
+              <label>PACS <br/> who did you report it to</label>
+	      <input type="text" ref="reported_to" required />
+	    
+	    </div>
+
+
+            <div>
+
+              <label>
+                <p>Training/Education</p> 
+                <p> What did you educate to whom. </p>
+                <p> Is there any additional education needed. Who did you notify </p>
+	      </label>
+	      <textarea rows="6" cols="20" ref="ed_training" required ></textarea>
+	    
+	    </div>
+
+	    <div>
+
+	      <input type="button" value="ADD" @click="setClient(); location.reload()" />
+
+            </div>
+	  </form>
+	</article>
+
+	<article class="result"> <!--print table result-->
+	  <div ref="result" >
+	    <table>
+	      <thead>
+
+	        <th> Patient Name </th>
+	        <th> ID # </th>
+	        <th> concern / no concern </th>
+	        <th> PACS <br/> who did you report it to. </th>
+	        <th>
+                  <p>Training/Education</p> 
+                  <p> What did you educate to whom. </p>
+                  <p> Is there any additional education needed. Who did you notify </p>
+	        </th>
+
+	      </thead>
+
+              <tbody v-if="clients.length !== 0">
+
+	        {{ getClients() }}
+                <tr v-for="client in clients" >
+		
+		  <td> {{ client.patient_name }} </td>
+		  <td> {{ client.patient_id }} </td>
+		  <td> {{ client.concern_noconcern }} </td>
+		  <td> {{ client.reported_to }} </td>
+		  <td> {{ client.ed_training }}</td>
+
+	        </tr>
+              </tbody>
+
+	    </table>
+	  </div>
+
+	  <div>
+
+	    <input type="button" value="PRINT" @click="printTable()" />
+	    <input type="button" value="RESET" @click="localStorage.setItem('clients', '{}'); location.reload()" />
+
+          </div>
+
+	</article>
+      </section>
+
+    </main>
+
+    <footer>
+      <a href="/">&copy;Eben C.</a>
+    </footer>
+
+  </body>
+</html>
+
